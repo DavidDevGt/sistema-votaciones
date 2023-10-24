@@ -2,8 +2,8 @@
 
 use PHPMailer\PHPMailer\Exception;
 
-require '../vendor/autoload.php';
-require 'config_mail.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+require __DIR__ . '/config_mail.php';
 
 /**
  * Envía un recordatorio al usuario sobre un tema próximo a expirar.

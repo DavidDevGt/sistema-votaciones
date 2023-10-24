@@ -1,5 +1,5 @@
 <?php
-require_once '../lib/db.php';
+require_once __DIR__ . '/../lib/db.php';
 
 /**
  * La función "registrar_usuario" toma un nombre de usuario, correo electrónico y contraseña, codifica

@@ -1,6 +1,11 @@
-<?php 
+<?php
 include 'header.php';
 include 'navbar.php';
+
+// Generar un token CSRF
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 ?>
 
 <style>
@@ -59,6 +64,32 @@ include 'navbar.php';
     </div>
 </div>
 
-<?php 
+<?php
 include 'footer.php';
 ?>
+<script>
+    $(document).ready(function() {
+        $('form').on('submit', function(e) {
+            e.preventDefault();
+
+            var formData = $(this).serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: '../controllers/auth/AuthController.php', // Asegúrate de que esta ruta sea correcta
+                data: formData,
+                dataType: 'json',
+                success: function(response) {
+                    if (response.success) {
+                        window.location.href = 'perfil.php';
+                    } else {
+                        alert(response.message);
+                    }
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log('Error en la comunicación con el servidor. Detalles: ' + textStatus + ': ' + errorThrown);
+                }
+            });
+        });
+    });
+</script>
