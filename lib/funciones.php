@@ -54,4 +54,33 @@ function validar_nombre_usuario($nombreUsuario) {
     return preg_match('/^[a-zA-Z0-9_]{5,20}$/', $nombreUsuario);
 }
 
-?>
+/**
+ * Envía un recordatorio al usuario sobre un tema próximo a expirar.
+ *
+ * @param int $id_usuario ID del usuario.
+ * @param string $tema Nombre del tema.
+ * @return void
+ */
+function enviar_recordatorio($id_usuario, $tema) {
+    // Aquí podrías usar una librería de envío de emails para notificar al usuario.
+    // Por ejemplo, PHPMailer.
+}
+
+/**
+ * Genera un enlace para compartir en redes sociales.
+ *
+ * @param string $url URL del tema.
+ * @param string $redSocial Red social ('facebook', 'twitter', etc.).
+ * @return string URL para compartir.
+ */
+function generar_enlace_red_social($url, $redSocial) {
+    switch ($redSocial) {
+        case 'facebook':
+            return "https://www.facebook.com/sharer/sharer.php?u=" . urlencode($url);
+        case 'twitter':
+            return "https://twitter.com/intent/tweet?url=" . urlencode($url);
+        // ... otros casos para otras redes sociales.
+        default:
+            return $url;
+    }
+}
