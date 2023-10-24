@@ -4,7 +4,7 @@
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'votaciones-sistema');
+define('DB_NAME', 'votaciones_sistema');
 
 // Función para obtener la conexión a la base de datos
 function getDBConnection()
