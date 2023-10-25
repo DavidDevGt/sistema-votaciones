@@ -1,5 +1,5 @@
 <?php
-session_start();  // Asegúrate de que esto esté al comienzo de registro.php
+//session_start();
 include 'header.php';
 include 'navbar.php';
 

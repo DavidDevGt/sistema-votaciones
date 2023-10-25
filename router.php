@@ -42,7 +42,7 @@ $router->map('POST', '/login/entrar', function () {
 });
 
 $router->map('GET', '/cerrar-sesion', function () {
-    cerrar_sesion();  // Llama a la función cerrar_sesion directamente
+    cerrar_sesion();
 });
 
 // Mas

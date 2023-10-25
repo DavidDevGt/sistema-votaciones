@@ -38,7 +38,15 @@ function registrar()
         }
 
         if (validar_nombre_usuario($nombre_usuario) && filter_var($correo_electronico, FILTER_VALIDATE_EMAIL)) {
-            registrar_usuario($nombre_usuario, $correo_electronico, $contrasena);
+            // Obtiene el ID del rol de usuario
+            $rol_usuario = obtener_id_rol('usuario');
+
+            // Registrar el usuario
+            $usuario_id = registrar_usuario($nombre_usuario, $correo_electronico, $contrasena, $rol_usuario);
+
+            // Asigna el rol de usuario
+            asignar_rol_usuario($usuario_id, $rol_usuario);
+
             iniciar_sesion();
             sendJsonResponse(true, 'Registro exitoso.');
         } else {
@@ -48,7 +56,6 @@ function registrar()
         sendJsonResponse(false, 'Método no permitido.');
     }
 }
-
 
 function iniciar_sesion()
 {
@@ -94,6 +101,15 @@ function cerrar_sesion()
     header('Location: /sistema-votaciones/inicio'); // Esto redirige al usuario a la ruta raíz
 }
 
-function verificar_sesion() {
+function verificar_sesion()
+{
     return isset($_SESSION['nombre_usuario']);
+}
+
+function obtener_id_rol($nombre_rol)
+{
+    $sql = "SELECT id_rol FROM roles WHERE nombre_rol = ?";
+    $result = dbQueryPreparada($sql, [$nombre_rol]);
+    $rol = dbFetchAssoc($result);
+    return $rol['id_rol'];
 }

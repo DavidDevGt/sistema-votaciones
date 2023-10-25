@@ -95,3 +95,42 @@ function dbQueryPreparada($sql, $params = [])
 
     return $result;
 }
+
+// Función para ejecutar consultas preparadas y obtener el ID insertado
+function dbQueryPreparada_insert($sql, $params = [])
+{
+    $mysqli = getDBConnection();
+    $stmt = $mysqli->prepare($sql);
+    if (!$stmt) {
+        die("Falló la preparación: (" . $mysqli->errno . ") " . $mysqli->error);
+    }
+
+    if ($params) {
+        $tipos = '';
+        foreach ($params as $param) {
+            if (is_int($param)) {
+                $tipos .= 'i';
+            } elseif (is_float($param)) {
+                $tipos .= 'd';
+            } elseif (is_string($param)) {
+                $tipos .= 's';
+            } else {
+                $tipos .= 'b';
+            }
+        }
+
+        $stmt->bind_param($tipos, ...$params);
+    }
+
+    // Ejecutamos la consulta
+    $stmt->execute();
+
+    // Obtenemos el ID del último registro insertado
+    $lastInsertId = $stmt->insert_id;
+
+    // Cerramos la consulta y la conexión
+    $stmt->close();
+    $mysqli->close();
+
+    return $lastInsertId;
+}
