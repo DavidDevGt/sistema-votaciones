@@ -5,9 +5,11 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start(); // Iniciar la sesión con PHP
-require_once __DIR__ . '/../../models/Usuario.php';
-require_once __DIR__ . '/../../lib/funciones.php';
-require_once __DIR__ . '/../../lib/response.php';
+define('BASE_PATH', __DIR__ . '/../../');
+
+require_once BASE_PATH . 'models/Usuario.php';
+require_once BASE_PATH . 'lib/funciones.php';
+require_once BASE_PATH . 'lib/response.php';
 
 function registrar()
 {
@@ -43,7 +45,7 @@ function cerrar_sesion()
 {
     session_unset(); // Eliminar todas las variables de sesión
     session_destroy(); // Destruir la sesión
-    header('Location: ../../index.php');
+    header('Location: /'); // Esto redirige al usuario a la ruta raíz
 }
 
 function esta_autenticado()
@@ -51,5 +53,4 @@ function esta_autenticado()
     return isset($_SESSION['nombre_usuario']);
 }
 
-// Llama a la función registrar cuando se accede al archivo
 registrar();
