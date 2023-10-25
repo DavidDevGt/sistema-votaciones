@@ -1,12 +1,12 @@
 $(document).ready(function () {
-  $("#registroForm").on("submit", function (e) {
+  $("#loginForm").on("submit", function (e) {
     e.preventDefault();
 
     var formData = $(this).serialize();
 
     $.ajax({
       type: "POST",
-      url: "registro/crear",
+      url: "login/entrar",
       data: formData,
       dataType: "json",
       success: function (response) {
@@ -23,8 +23,8 @@ $(document).ready(function () {
             ": " +
             errorThrown
         );
-        console.log(jqXHR.responseText); // Añade esta línea
-        console.log(jqXHR.status); // Añade esta línea
+        console.log(jqXHR.responseText);
+        console.log(jqXHR.status);
       },
     });
   });

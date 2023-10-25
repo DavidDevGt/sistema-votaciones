@@ -38,7 +38,7 @@ include 'navbar.php';
                     <h4 class="mb-0">Inicio de sesión</h4>
                 </div>
                 <div class="card-body">
-                    <form action="/controllers/auth/AuthController.php" method="post">
+                    <form action="login/entrar" method="post" id="loginForm">
                         <div class="mb-3">
                             <label for="nombre_usuario" class="form-label">Nombre de usuario</label>
                             <input type="text" name="nombre_usuario" class="form-control" id="nombre_usuario" placeholder="Nombre de usuario" required>
@@ -58,3 +58,5 @@ include 'navbar.php';
 <?php 
 include 'footer.php';
 ?>
+
+<script src="assets/js/login.js"></script>
