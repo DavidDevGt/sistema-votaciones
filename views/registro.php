@@ -41,29 +41,27 @@ if (!isset($_SESSION['csrf_token'])) {
         <div class="col-md-6">
             <div class="card animate__animated animate__fadeIn">
                 <div class="card-header bg-primary text-white">
-                    <h4 class="mb-0">Registro</h4>
+                    <h4 class="mb-0 text-center">Registro</h4>
                 </div>
                 <div class="card-body">
                     <form action="registro/crear" method="post" id="registroForm">
                         <div class="mb-3">
                             <label for="nombre_usuario" class="form-label">Nombre de usuario</label>
-                            <input type="text" name="nombre_usuario" class="form-control" id="nombre_usuario"
-                                placeholder="Nombre de usuario" required>
+                            <input type="text" name="nombre_usuario" class="form-control" id="nombre_usuario" placeholder="Nombre de usuario" required>
                         </div>
                         <div class="mb-3">
                             <label for="correo_electronico" class="form-label">Correo electrónico</label>
-                            <input type="email" name="correo_electronico" class="form-control" id="correo_electronico"
-                                placeholder="Correo electrónico" required>
+                            <input type="email" name="correo_electronico" class="form-control" id="correo_electronico" placeholder="Correo electrónico" required>
                         </div>
                         <div class="mb-3">
                             <label for="contrasena" class="form-label">Contraseña</label>
-                            <input type="password" name="contrasena" class="form-control" id="contrasena"
-                                placeholder="Contraseña" required>
+                            <input type="password" name="contrasena" class="form-control" id="contrasena" placeholder="Contraseña" required>
                             <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                             <input type="hidden" name="action" value="register">
                         </div>
-                        <button type="submit"
-                            class="btn btn-primary btn-block animate__animated animate__tada animate__delay-1s">Registrar</button>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary btn-block animate__animated animate__tada animate__delay-1s">Registrar</button>
+                        </div>
                     </form>
                 </div>
             </div>
