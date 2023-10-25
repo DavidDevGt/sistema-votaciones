@@ -91,32 +91,9 @@ function cerrar_sesion()
 {
     session_unset(); // Eliminar todas las variables de sesión
     session_destroy(); // Destruir la sesión
-    header('Location: /'); // Esto redirige al usuario a la ruta raíz
+    header('Location: /sistema-votaciones/inicio'); // Esto redirige al usuario a la ruta raíz
 }
 
-function esta_autenticado()
-{
+function verificar_sesion() {
     return isset($_SESSION['nombre_usuario']);
 }
-
-function handle_request() {
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $action = isset($_POST['action']) ? $_POST['action'] : null;
-        switch ($action) {
-            case 'register':
-                registrar();
-                break;
-            case 'login':
-                iniciar_sesion();
-                break;
-            default:
-                sendJsonResponse(false, 'Acción no permitida.');
-                break;
-        }
-    } else {
-        sendJsonResponse(false, 'Método no permitido.');
-    }
-}
-
-// Llama a la función handle_request para manejar la solicitud
-handle_request();

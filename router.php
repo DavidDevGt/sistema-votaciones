@@ -1,42 +1,56 @@
 <?php
+require_once 'vendor/autoload.php';
+require_once 'controllers/auth/AuthController.php';
 
-require 'vendor/autoload.php';
-
+// Inicio el enrutador con la lib AltoRouter
 $router = new AltoRouter();
 
+// Configurar la ruta
 $router->setBasePath('/sistema-votaciones');
 
 // Rutas
-
 $router->map('GET', '/', function () {
-    require __DIR__ . '/views/index.php';
+    if (!verificar_sesion()) {
+        header('Location: /sistema-votaciones/login');
+        exit();
+    }
+    require __DIR__ . '/index.php';
 }, 'inicio');
 
 $router->map('GET', '/registro', function () {
+    if (verificar_sesion()) {
+        header('Location: /sistema-votaciones/');
+        exit();
+    }
     require __DIR__ . '/views/registro.php';
 }, 'registro');
 
 $router->map('GET', '/login', function () {
+    if (verificar_sesion()) {
+        header('Location: /sistema-votaciones/');
+        exit();
+    }
     require __DIR__ . '/views/login.php';
 }, 'login');
 
 $router->map('POST', '/registro/crear', function () {
-    require __DIR__ . '/controllers/auth/AuthController.php';
+    registrar();
 });
 
 $router->map('POST', '/login/entrar', function () {
-    require __DIR__ . '/controllers/auth/AuthController.php';
+    iniciar_sesion();
 });
 
+$router->map('GET', '/cerrar-sesion', function () {
+    cerrar_sesion();  // Llama a la función cerrar_sesion directamente
+});
 
 // Mas
 
 // Que hagan match como si fuera Tinder :v
-
 $match = $router->match();
 
 // Llamar al callback o mostrar un error 404
-
 if ($match && is_callable($match['target'])) {
     call_user_func_array($match['target'], $match['params']);
 } else {
