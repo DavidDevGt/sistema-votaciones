@@ -47,7 +47,7 @@ include 'navbar.php';
                             <label for="contrasena" class="form-label">Contraseña</label>
                             <input type="password" name="contrasena" class="form-control" id="contrasena" placeholder="Contraseña" required>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block animate__animated animate__pulse animate__infinite">Iniciar sesión</button>
+                        <button type="submit" class="btn btn-primary btn-block animate__animated animate__tada animate__delay-1s">Iniciar sesión</button>
                     </form>
                 </div>
             </div>

@@ -56,7 +56,7 @@ if (!isset($_SESSION['csrf_token'])) {
                             <label for="contrasena" class="form-label">Contraseña</label>
                             <input type="password" name="contrasena" class="form-control" id="contrasena" placeholder="Contraseña" required>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block animate__animated animate__pulse animate__infinite">Registrar</button>
+                        <button type="submit" class="btn btn-primary btn-block animate__animated animate__tada animate__delay-1s">Registrar</button>
                     </form>
                 </div>
             </div>
