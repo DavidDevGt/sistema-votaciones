@@ -24,6 +24,10 @@ $router->map('POST', '/registro/crear', function () {
     require __DIR__ . '/controllers/auth/AuthController.php';
 });
 
+$router->map('POST', '/login/entrar', function () {
+    require __DIR__ . '/controllers/auth/AuthController.php';
+});
+
 
 // Mas
 

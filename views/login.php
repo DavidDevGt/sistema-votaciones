@@ -1,6 +1,12 @@
-<?php 
+<?php
+session_start(); // Asegúrate de que esto esté al comienzo de registro.php
 include 'header.php';
 include 'navbar.php';
+
+// Generar un token CSRF
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 ?>
 
 <style>
@@ -41,13 +47,19 @@ include 'navbar.php';
                     <form action="login/entrar" method="post" id="loginForm">
                         <div class="mb-3">
                             <label for="nombre_usuario" class="form-label">Nombre de usuario</label>
-                            <input type="text" name="nombre_usuario" class="form-control" id="nombre_usuario" placeholder="Nombre de usuario" required>
+                            <input type="text" name="nombre_usuario" class="form-control" id="nombre_usuario"
+                                placeholder="Nombre de usuario" required pattern="[a-zA-Z0-9]+">
                         </div>
                         <div class="mb-3">
                             <label for="contrasena" class="form-label">Contraseña</label>
-                            <input type="password" name="contrasena" class="form-control" id="contrasena" placeholder="Contraseña" required>
+                            <input type="password" name="contrasena" class="form-control" id="contrasena"
+                                placeholder="Contraseña" required>
+                            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+                            <input type="hidden" name="action" value="login">
                         </div>
-                        <button type="submit" class="btn btn-primary btn-block animate__animated animate__tada animate__delay-1s">Iniciar sesión</button>
+                        <button type="submit"
+                            class="btn btn-primary btn-block animate__animated animate__tada animate__delay-1s">Iniciar
+                            sesión</button>
                     </form>
                 </div>
             </div>
@@ -55,7 +67,7 @@ include 'navbar.php';
     </div>
 </div>
 
-<?php 
+<?php
 include 'footer.php';
 ?>
 
