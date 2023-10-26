@@ -7,11 +7,6 @@
         width: 79px;
         height: auto;
         margin-right: 10px;
-        transition: transform 0.3s;
-    }
-
-    .navbar-brand:hover {
-        transform: scale(1.03);
     }
 
     .nav-link {
